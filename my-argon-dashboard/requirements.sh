@@ -6,6 +6,16 @@ set -e
 # Message d'accueil
 echo "🔧 Configuration automatique du projet Laravel..."
 
+# Vérification de la présence de PHP
+if ! command -v php &> /dev/null
+then
+    echo "⚠️ PHP n'est pas installé. Installation de PHP..."
+    sudo apt update
+    sudo apt install -y php php-cli php-mbstring php-xml php-zip
+else
+    echo "✅ PHP est déjà installé."
+fi
+
 # Vérification de la présence du fichier .env
 if [ ! -f .env ]; then
   echo "📄 Copie du fichier .env.example vers .env"
