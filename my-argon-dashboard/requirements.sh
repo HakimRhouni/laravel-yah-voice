@@ -16,6 +16,14 @@ else
     echo "✅ PHP est déjà installé."
 fi
 
+# Vérification de la présence de l'extension cURL pour PHP
+if ! php -m | grep -q 'curl'; then
+    echo "⚠️ L'extension cURL pour PHP n'est pas installée. Installation..."
+    sudo apt install -y php-curl
+else
+    echo "✅ L'extension cURL pour PHP est déjà installée."
+fi
+
 # Vérification de la présence du fichier .env
 if [ ! -f .env ]; then
   echo "📄 Copie du fichier .env.example vers .env"
