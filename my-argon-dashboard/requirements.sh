@@ -1,39 +1,42 @@
 #!/bin/bash
 
-# Fonction pour afficher les messages avec style
-function print_message() {
-  echo -e "\n\e[1;32m$1\e[0m\n"
-}
+# Arrêter le script en cas d'erreur
+set -e
 
-# 1. Cloner le dépôt Laravel (si nécessaire)
-print_message "Clonage du dépôt..."
-git clone https://github.com/HakimRhouni/laravel-yah-voice
+# Message d'accueil
+echo "🔧 Configuration automatique du projet Laravel..."
 
-# Se déplacer dans le dossier du projet
-cd my-argon-dashboard 
+# Vérification de la présence du fichier .env
+if [ ! -f .env ]; then
+  echo "📄 Copie du fichier .env.example vers .env"
+  cp .env.example .env
+fi
 
-# 2. Installer les dépendances avec Composer
-print_message "Installation des dépendances avec Composer..."
+# Mise à jour du fichier .env
+echo "⚙️ Mise à jour des valeurs dans le fichier .env"
+sed -i 's/DB_DATABASE=homestead/DB_DATABASE=votre_nom_de_base/' .env
+sed -i 's/DB_USERNAME=homestead/DB_USERNAME=votre_nom_utilisateur/' .env
+sed -i 's/DB_PASSWORD=secret/DB_PASSWORD=votre_mot_de_passe/' .env
+
+# Installation des dépendances Composer
+echo "📦 Installation des dépendances Composer..."
 composer install
 
-# 3. Configurer le fichier .env
-print_message "Configuration du fichier .env..."
-cp .env.example .env
-
-# Modifier automatiquement certaines valeurs du fichier .env
-sed -i 's/APP_NAME=Laravel/APP_NAME="VotreNomDeProjet"/' .env
-sed -i 's/DB_DATABASE=laravel/DB_DATABASE=nom_de_votre_base/' .env
-sed -i 's/DB_USERNAME=root/DB_USERNAME=nom_utilisateur/' .env
-sed -i 's/DB_PASSWORD=/DB_PASSWORD=mot_de_passe/' .env
-
-# 4. Générer la clé de l'application
-print_message "Génération de la clé de l'application..."
+# Génération de la clé d'application Laravel
+echo "🔑 Génération de la clé d'application..."
 php artisan key:generate
 
-# 5. Lancer les migrations de base de données (si nécessaire)
-print_message "Exécution des migrations..."
+# Installation des dépendances npm
+echo "📦 Installation des dépendances npm..."
+npm install
+
+# Compilation des fichiers d'assets
+echo "🚀 Compilation des fichiers front-end..."
+npm run dev
+
+# Exécution des migrations de la base de données
+echo "🛠️ Exécution des migrations..."
 php artisan migrate
 
-# 6. Lancer le serveur Laravel
-print_message "Démarrage du serveur Laravel..."
-php artisan serve --host=0.0.0.0 --port=8000
+# Fin du script
+echo "🎉 Le projet a été configuré et est prêt à être utilisé."
