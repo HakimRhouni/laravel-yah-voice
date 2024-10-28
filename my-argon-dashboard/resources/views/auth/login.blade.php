@@ -56,10 +56,8 @@
                                 style="background-image:  url('{{ asset('img/calls.jpg') }}');
               background-size: cover;">
                                 <span class="mask bg-gradient-primary opacity-6"></span>
-                                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new
-                                    currency"</h4>
-                                <p class="text-white position-relative">The more effortless the writing looks, the more
-                                    effort the writer actually put into the process.</p>
+                                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Yahvoid - Votre Solution VOIP pour Centres d'Appel"</h4>
+                                <p class="text-white position-relative">Des solutions avancées pour améliorer l'efficacité et la productivité de votre centre d'appel</p>
                             </div>
                         </div>
                     </div>
